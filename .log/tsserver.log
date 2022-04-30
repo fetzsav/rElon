@@ -1,0 +1,14 @@
+Info 0    [15:55:34.008] Starting TS Server
+Info 1    [15:55:34.008] Version: 4.6.3
+Info 2    [15:55:34.009] Arguments: /usr/local/bin/node /home/fetz/.emacs.d/.local/etc/lsp/npm/typescript/lib/node_modules/typescript/lib/tsserver.js --logFile /home/fetz/Projects/relon/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/2c3affa0ea28fc9cfee1dd2144fdc150/tscancellation*
+Info 3    [15:55:34.009] Platform: linux NodeVersion: 16 CaseSensitive: true
+Info 4    [15:55:34.009] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [15:55:34.018] Format host information updated
+Info 6    [15:55:34.035] Search path: /home/fetz/Projects/relon
+Info 7    [15:55:34.035] For info: /home/fetz/Projects/relon/app.js :: No config files found.
+Info 8    [15:55:34.039] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 9    [15:55:34.454] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 414.8539990186691ms
+Info 10   [15:55:34.454] Project '/dev/null/inferredProject1*' (Inferred)
+Info 11   [15:55:34.454] 	Files (19)
+
+Info 12   [15:55:34.454] -----------------------------------------------
