@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "description": "twitter rt bot",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fetzer",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "twitter-api-v2": "^1.12.0"
+  }
 }
