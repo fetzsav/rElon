@@ -1,4 +1,7 @@
 # rElon - (ToS Compliant) Twitter Retweet Bot
+- Watch beta run on Twitter @BilboTheBot
+- full usage guide coming soon
+
 
 ### Key Doo-Dads:
 - Searches recent tweets using specified hashtags
