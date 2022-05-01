@@ -13,26 +13,21 @@ const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 
 
+let retweetList = [];
+
+
 //This function decides if we will be authenticating using bearer token or api keys
 const authMethod = () => {
   if(apiKey && apiSecret && accessToken && accessTokenSecret) {
     console.log('Authenticating with API Keys');
-    // const auth = {
-    //   appKey: apiKey,
-    //   appSecret: apiSecret,
-    //   accessToken: accessToken,
-    //   accessSecret: accessTokenSecret,
-    // };
     const auth = {
-      clientId: clientId,
-      clientSecret: clientSecret,
-    }
+      appKey: apiKey,
+      appSecret: apiSecret,
+      accessToken: accessToken,
+      accessSecret: accessTokenSecret,
+    };
     return auth;
-  } else if(bearerToken){
-    console.log('Authenticating with Bearer Token');
-    const auth = bearerToken
-    return auth;
-  } else {
+  }  else {
     console.log('Missing API keys. Please check your .env file');
   }
 }
@@ -42,23 +37,53 @@ const authMethod = () => {
 //A list of possible endpoints (methods) can be found here:
 //https://developer.twitter.com/en/docs/authentication/guides/v2-authentication-mapping
 const auth = authMethod();
-const auth2 = {
-  appKey: apiKey,
-  appSecret: apiSecret,
-  accessToken: accessToken,
-  accessSecret: accessTokenSecret,
+const twitter = new TwitterApi(auth);
+
+
+const searchQ = "(programming) OR (kind words) OR (best friend) -is:retweet -is:reply"
+
+function searchTag() {
+  twitter.v2.search(searchQ, { 'media.fields': 'url' }).then((res) => {
+    for(let tweet in res.data.data){
+      retweetList.push(res.data.data[tweet].id);
+    }
+    console.log('✅ -', res.data.meta.result_count, 'posts added to retweet list');
+    retweetTweets();
+  })
 }
-console.log(auth2);
-const twitter = new TwitterApi(auth2);
-console.log(twitter);
 
-twitter.v2.singleTweet('1507372124779995138').then((val) => {
-  console.log(val);
-});
+function retweetTweets() {
+  if(retweetList.length < 1){
+    searchTag();
+  }
+  if(retweetList.length > 0){
+  twitter.v2.retweet('1520144044663484416', retweetList[0]).then((res) => {
+    if(res.data.retweeted == true){
+      console.log('✅ - Retweeted Tweet:', retweetList[0]);
+    } else{
+      console.log('❌ - Failed to retweet (perhaps the tweet was deleted?)', retweetList[0])
+    }
+  })
+
+  retweetList.shift();
+
+  }
+}
 
 
-twitter.v2.tweet('this is a test tweet').then((res) => {
+
+retweetTweets();
+setInterval(retweetTweets, 480000);
+
+
+
+
+
+//sendTestTweet();                //
+function sendTestTweet(){
+twitter.v2.tweet('this is a second test tweet').then((res) => {
   console.log('✅ Success',res);
 }).catch((err) => {
   console.log('❌ error', err);
 })
+}
