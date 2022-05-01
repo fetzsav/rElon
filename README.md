@@ -13,6 +13,7 @@
 2. Paste app API keys into .env.example
 3. Rename .env.example to .env
 4. Edit config.json
-5. npm install / npm start
+5. npm install
+6. npm start
 
 

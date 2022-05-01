@@ -40,7 +40,7 @@ const auth = authMethod();
 const twitter = new TwitterApi(auth);
 
 
-const searchQ = "(programming) OR (kind words) OR (best friend) -is:retweet -is:reply"
+const searchQ = "(programming) OR (kind words) OR (best friend) -is:retweet"
 
 function searchTag() {
   twitter.v2.search(searchQ, { 'media.fields': 'url' }).then((res) => {
